@@ -1,20 +1,32 @@
 <!-- app/views/movies/index.html.erb -->
 
-<table class="movies-table">
-  <thead>
-    <tr>
-      <th class="<%= sort_column_class('title') %>"><%= sortable_column "Title", "title" %></th>
-      <th class="<%= sort_column_class('rating') %>"><%= sortable_column "Rating", "rating" %></th>
-      <th class="<%= sort_column_class('release_date') %>"><%= sortable_column "Release Date", "release_date" %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @movies.each do |movie| %>
+<h1>Movies</h1>
+
+<div id="movies">
+  <table class="movies-table">
+    <thead>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.release_date %></td>
+        <th><%= sortable_column "Title", "title" %></th>
+        <th><%= sortable_column "Rating", "rating" %></th>
+        <th><%= sortable_column "Release Date", "release_date" %></th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.rating %></td>
+          <td><%= movie.release_date %></td>
+          <td>
+            <%= link_to "Show", movie %>
+            <%= link_to "Edit", edit_movie_path(movie) %>
+            <%= link_to "Delete", movie, method: :delete, data: { confirm: "Are you sure?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New movie", new_movie_path %>
