@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+/* app/assets/stylesheets/application.css */
+
+.movies-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .movies-table th,
+  .movies-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .movies-table th {
+    cursor: pointer;
+  }
+  
+  .movies-table th:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .movies-table th.sorted-asc::after {
+    content: ' ▲';
+  }
+  
+  .movies-table th.sorted-desc::after {
+    content: ' ▼';
+  }
+  
+ 
+  

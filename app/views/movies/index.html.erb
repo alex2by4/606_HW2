@@ -1,3 +1,5 @@
+<!-- app/views/movies/index.html.erb -->
+
 <p style="color: green"><%= notice %></p>
 
 <h1>Movies</h1>
@@ -12,3 +14,50 @@
 </div>
 
 <%= link_to "New movie", new_movie_path %>
+<!-- app/views/movies/index.html.erb -->
+
+<table class="movies-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Rating</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.rating %></td>
+        <td><%= movie.release_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const headers = document.querySelectorAll('.movies-table th');
+
+    headers.forEach(header => {
+      header.addEventListener('click', function() {
+        const column = this.dataset.column;
+        const sortOrder = this.dataset.order || 'asc';
+
+        const sortedRows = Array.from(document.querySelectorAll('.movies-table tbody tr'))
+          .sort((a, b) => {
+            const aValue = a.querySelector(`td[data-column="${column}"]`).textContent.trim();
+            const bValue = b.querySelector(`td[data-column="${column}"]`).textContent.trim();
+
+            return sortOrder === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+          });
+
+        document.querySelector('.movies-table tbody').innerHTML = '';
+        sortedRows.forEach(row => document.querySelector('.movies-table tbody').appendChild(row));
+
+        this.dataset.order = sortOrder === 'asc' ? 'desc' : 'asc';
+      });
+    });
+  });
+</script>
