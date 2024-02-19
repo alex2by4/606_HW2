@@ -4,7 +4,9 @@ class MoviesController < ApplicationController
   # GET /movies or /movies.json
   def index
     @movies = Movie.all
+    @movies = @movies.order("#{sort_column} #{sort_direction}")
   end
+
 
   # GET /movies/1 or /movies/1.json
   def show
@@ -67,4 +69,14 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
+
+    # Define methods for sorting column and direction
+    def sort_column
+      Movie.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

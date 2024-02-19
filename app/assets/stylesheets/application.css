@@ -40,11 +40,23 @@
   
   .movies-table th.sorted-asc::after {
     content: ' ▲';
+    color: green; /* Change color for ascending sorting */
   }
   
   .movies-table th.sorted-desc::after {
     content: ' ▼';
+    color: red; /* Change color for descending sorting */
   }
+
+  .movies-table th.sorted-ascending {
+    background-color: lightgreen; /* Change background color for ascending sorting */
+  }
+  
+  .movies-table th.sorted-descending {
+    background-color: lightcoral; /* Change background color for descending sorting */
+  }
+  
+  
   
  
   
